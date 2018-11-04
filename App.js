@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import NewDeck from './components/Deck';
+import Deck from './components/Deck';
 import NewCard from './components/NewCard';
 import NewDeck from './components/NewDeck';
 import reducer from './reducers';
