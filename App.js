@@ -7,6 +7,7 @@ import { createStore } from 'redux';
 
 import { Ionicons } from '@expo/vector-icons';
 
+import NewDeck from './components/Deck';
 import NewCard from './components/NewCard';
 import NewDeck from './components/NewDeck';
 import reducer from './reducers';
@@ -57,6 +58,19 @@ const TabNavigation = createBottomTabNavigator({
   });
 
 const StackNavigation = createStackNavigator({
+  Home: {
+    screen: TabNavigation,
+    navigationOptions: {
+      header: null,
+      title: 'Go Back',
+    },
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      title: Decks,
+    },
+  },
   NewCard: {
     screen: NewCard,
     navigationOptions: {
