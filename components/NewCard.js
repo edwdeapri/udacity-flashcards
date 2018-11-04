@@ -5,10 +5,33 @@ import { connect } from 'react-redux';
 import InputButton from './InputButton';
 import InputText from './InputText';
 
+import { addNewCard } from '../actions';
+
 class NewCard extends Component {
   state = {
     question: '',
     answer: '',
+  };
+
+  static navigationOptions = ({ navigation }) => {
+    const { deckId } = navigation.state.params;
+    return {
+      title: deckId,
+    };
+  };
+
+  addCard = () => {
+    const { deckId } = this.props;
+    const newCard = this.state;
+
+    addCardToDeck(deckId, newCard)
+    .then(() => {
+      this.props.dispatch(addNewCard(deckId, newCard));
+      this.setState(() => ({
+        question: '',
+        answer: '',
+      }));
+    });
   };
 
   render() {
@@ -35,4 +58,11 @@ class NewCard extends Component {
   }
 }
 
-export default NewCard;
+function mapStateToProps(stat, { navigation }) {
+  const { deckId } = navigation.state.params;
+  return {
+    deckId,
+  };
+}
+
+export default connect(NewCard);

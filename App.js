@@ -1,21 +1,46 @@
+import { Constants } from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import NewCard from './components/NewCard';
+import reducer from './reducers';
+
+function FlashcardsStatusBar({ backgroundColor, ...props }) {
+  return (
+    <View
+      style={{ backgroundColor,
+        height: Constants.statusBarHeight,
+      }}>
+      <StatusBar
+        translucent
+        backgroundColor={backgroundColor} {...props} />
+    </View>
+  );
+}
+
+const StackNavigation = createStackNavigator({
+  NewCard: {
+    screen: NewCard,
+    navigationOptions: {
+      title: 'Add Flashcard',
+    },
+  },
+});
+
+const store = createStore(reducer);
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <Provider store={store}>
+        <View>
+          <FlashcardsStatusBar />
+          <StackNavigation />
+        </View>
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
