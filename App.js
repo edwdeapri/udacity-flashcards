@@ -1,11 +1,14 @@
 import { Constants } from 'expo';
 import React from 'react';
 import { StatusBar, View } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
+import { Ionicons } from '@expo/vector-icons';
+
 import NewCard from './components/NewCard';
+import NewDeck from './components/NewDeck';
 import reducer from './reducers';
 
 function FlashcardsStatusBar({ backgroundColor, ...props }) {
@@ -20,6 +23,38 @@ function FlashcardsStatusBar({ backgroundColor, ...props }) {
     </View>
   );
 }
+
+const TabNavigation = createBottomTabNavigator({
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: 'New Deck',
+      tabBarIcon: ({ tintColor }) =>
+      <Ionicons
+        name='ios-add-circle-outline'
+        size={30}
+        color={tintColor} />,
+    },
+  },
+}, {
+    navigationOptions: {
+        header: null,
+      },
+    tabBarOptions: {
+        activeTintColor: 'white',
+        style: {
+            height: 50,
+            backgroundColor: 'darkGray',
+            shadowColor: 'rgba(0, 0, 0, 0.2)',
+            shadowOffset: {
+                width: 0,
+                height: 3,
+              },
+            shadowRadius: 6,
+            shadowOpacity: 1,
+          },
+      },
+  });
 
 const StackNavigation = createStackNavigator({
   NewCard: {
