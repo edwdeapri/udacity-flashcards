@@ -1,12 +1,12 @@
 import React from 'react';
 import { TextInput } from 'react-native';
 
-export default function InputText({ handleChange, value, placeholder }) {
+export default function InputText({ handleChange, placeholder, value }) {
   return (
     <TextInput
       onChangeText={handleChange}
-      value={value}
       placeholder={placeholder}
+      value={value}
     />
 );
 }

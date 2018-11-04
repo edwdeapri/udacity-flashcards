@@ -1,9 +1,11 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-export default function InputButton({ onPress, children, isDisabled }) {
+export default function InputButton({ isDisabled, onPress, children }) {
   return (
-    <TouchableOpacity onPress={onPress} disabled={isDisabled}>
+    <TouchableOpacity
+      disabled={isDisabled}
+      onPress={onPress}>
       <Text>{children}</Text>
     </TouchableOpacity>
   );
