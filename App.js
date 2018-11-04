@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Deck from './components/Deck';
 import NewCard from './components/NewCard';
 import NewDeck from './components/NewDeck';
+import Stack from './components/Stack';
 import reducer from './reducers';
 
 function FlashcardsStatusBar({ backgroundColor, ...props }) {
@@ -26,13 +27,24 @@ function FlashcardsStatusBar({ backgroundColor, ...props }) {
 }
 
 const TabNavigation = createBottomTabNavigator({
+  Stack: {
+    screen: Stack,
+    navigationOptions: {
+      tabBarLabel: 'Decks',
+      tabBarIcon: ({ tintColor }) =>
+      <Ionicons
+        name='ios-add-circle-outline'
+        size={30}
+        color={tintColor} />,
+    },
+  },
   NewDeck: {
     screen: NewDeck,
     navigationOptions: {
       tabBarLabel: 'New Deck',
       tabBarIcon: ({ tintColor }) =>
       <Ionicons
-        name='ios-add-circle-outline'
+        name='ios-albums'
         size={30}
         color={tintColor} />,
     },
