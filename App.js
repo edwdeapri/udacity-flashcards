@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Deck from './components/Deck';
 import NewCard from './components/NewCard';
 import NewDeck from './components/NewDeck';
+import Quiz from './components/Quiz';
 import Stack from './components/Stack';
 import reducer from './reducers';
 
@@ -26,47 +27,47 @@ function FlashcardsStatusBar({ backgroundColor, ...props }) {
   );
 }
 
-const TabNavigation = createBottomTabNavigator({
-  Stack: {
-    screen: Stack,
-    navigationOptions: {
-      tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) =>
-      <Ionicons
-        name='ios-add-circle-outline'
-        size={30}
-        color={tintColor} />,
-    },
-  },
-  NewDeck: {
-    screen: NewDeck,
-    navigationOptions: {
-      tabBarLabel: 'New Deck',
-      tabBarIcon: ({ tintColor }) =>
-      <Ionicons
-        name='ios-albums'
-        size={30}
-        color={tintColor} />,
-    },
-  },
-}, {
-    navigationOptions: {
-        header: null,
+const TabNavigation = createBottomTabNavigator(
+  {
+    Stack: {
+      screen: Stack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) =>
+        <Ionicons
+          name='ios-add-circle-outline'
+          size={30}
+          color={tintColor} />,
       },
+    },
+    NewDeck: {
+      screen: NewDeck,
+      navigationOptions: {
+        tabBarLabel: 'New Deck',
+        tabBarIcon: ({ tintColor }) =>
+        <Ionicons
+          name='ios-albums'
+          size={30}
+          color={tintColor} />,
+      },
+    },
+  }, {
+    navigationOptions: {
+      header: null,
+    },
     tabBarOptions: {
-        activeTintColor: 'white',
-        style: {
-            height: 50,
-            backgroundColor: 'darkGray',
-            shadowColor: 'rgba(0, 0, 0, 0.2)',
-            shadowOffset: {
-                width: 0,
-                height: 3,
-              },
-            shadowRadius: 6,
-            shadowOpacity: 1,
-          },
+      activeTintColor: 'white',
+      style: {
+        height: 50,
+        backgroundColor: 'darkGray',
+        shadowColor: 'rgba(0, 0, 0, 0.2)',
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowRadius: 6,
+        shadowOpacity: 1,
       },
+    },
   });
 
 const StackNavigation = createStackNavigator({
@@ -80,13 +81,19 @@ const StackNavigation = createStackNavigator({
   Deck: {
     screen: Deck,
     navigationOptions: {
-      title: Decks,
+      title: 'Decks',
     },
   },
   NewCard: {
     screen: NewCard,
     navigationOptions: {
       title: 'Add Flashcard',
+    },
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz',
     },
   },
 });

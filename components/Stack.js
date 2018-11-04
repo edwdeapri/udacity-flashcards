@@ -21,8 +21,8 @@ class Stack extends Component {
     const { stack } = this.props;
     return (
       <TouchableOpacity onPress={() => this.viewDeck(item)} style={styles.card}>
-        <Text>{decks[item].title}</Text>
-        <Text>({decks[item].questions.length} Cards)</Text>
+        <Text>{stack[item].title}</Text>
+        <Text>({stack[item].questions.length} Cards)</Text>
       </TouchableOpacity>
     );
   };
