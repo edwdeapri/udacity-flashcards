@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { addNewStack } from '../actions';
 import { getDeckFromStack } from '../utils/api';
+import { cream } from '../utils/color';
+import { global } from '../utils/global';
 
 class Stack extends Component {
   state = {
@@ -20,9 +22,15 @@ class Stack extends Component {
   renderItem = ({ item }) => {
     const { stack } = this.props;
     return (
-      <TouchableOpacity onPress={() => this.viewDeck(item)} style={styles.card}>
-        <Text>{stack[item].title}</Text>
-        <Text>({stack[item].questions.length} Cards)</Text>
+      <TouchableOpacity
+        onPress={ () => this.viewDeck(item) }
+        style={ global.card }>
+        <Text style={ global.cardHeader }>
+          { stack[item].title }
+        </Text>
+        <Text style={ global.cardSubHeader }>
+          ({ stack[item].question.length } Cards)
+        </Text>
       </TouchableOpacity>
     );
   };
@@ -44,14 +52,24 @@ class Stack extends Component {
     }
 
     return (
-      <View>{
-          deckKeys.length > 0
+      <View style={[
+          global.darkBackground,
+          global.center,
+          { padding: 20 },
+        ]}>
+        { deckKeys.length > 0
           ? <FlatList
               data={deckKeys}
+              keyExtractor={item => item}
               renderItem={this.renderItem}
-              keyExtractor={item => item} />
-          : <Text>There are no decks.</Text>
-      }</View>
+              style={ global.list } />
+            : <Text style={[
+              global.header,
+              { color: cream },
+            ]}>
+          There are no decks.
+        </Text> }
+        </View>
     );
   }
 }

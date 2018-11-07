@@ -3,12 +3,12 @@ import { ADD_CARD, ADD_DECK, ADD_STACK } from '../actions';
 function stack(state = {}, action) {
   switch (action.type) {
     case ADD_CARD:
-      const updateQuestion = state[action.deckId].questions.concat(action.newCard);
+      const updateQuestion = state[action.deckId].question.concat(action.newCard);
       return {
         ...state,
         [action.deckId]: {
           ...state[action.deckId],
-          questions: updateQuestion,
+          question: updateQuestion,
         },
       };
     case ADD_DECK:

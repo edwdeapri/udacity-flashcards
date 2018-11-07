@@ -10,14 +10,14 @@ export function addNewCard(deckId, newCard) {
   };
 }
 
-export function addNewDeck(deckId, newCard) {
+export function addNewDeck(deck) {
   return {
     type: ADD_DECK,
     deck,
   };
 }
 
-export function addNewStack(deckId, newCard) {
+export function addNewStack(stack) {
   return {
     type: ADD_STACK,
     stack,

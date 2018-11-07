@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 
 import InputButton from './InputButton';
 
+import { charcoal, cream } from '../utils/color';
+import { global } from '../utils/global';
+
 class Deck extends Component {
   state = {
     opacity: new Animated.Value(0),
@@ -36,16 +39,45 @@ class Deck extends Component {
     Animated.timing(opacity, { toValue: 1, duration: 1000 }).start();
 
     return (
-      <Animated.View>
-        <Text>{deck.title}</Text>
-        {deck.question.length > 0
-          ? <Text>({deck.questions.length} cards)</Text>
-          : <Text>There are currently no cards.</Text>
+      <Animated.View style={[
+          global.darkBackground,
+          global.center,
+          { padding: 20,
+            opacity: 0.2, },
+          ]}>
+        <Text style={[
+            global.cardHeader,
+            { color: cream,
+              marginBottom: 10, },
+            ]}>
+            { deck.title }
+          </Text>
+          { deck.question.length > 0
+            ? <Text style={[
+              global.cardSubHeader,
+              { marginBottom: 50 },
+            ]}>
+            ({ deck.question.length } cards)
+          </Text>
+          : <Text style={[
+            global.cardSubHeader,
+            { marginBottom: 50, },
+          ]}>
+          There are currently no cards.
+        </Text>
         }
-        <InputButton onPress={this.handleAddCard}>Add Card</InputButton>
         <InputButton
-          onPress={this.handleStartQuiz}
-          isDisabled={deck.questions.length === 0}>
+          borderColor={ cream }
+          color={ cream }
+          onPress={ this.handleAddCard }>
+          Add Card
+        </InputButton>
+        <InputButton
+          backgroundColor={ cream }
+          borderColor={ cream }
+          color={ charcoal }
+          isDisabled={ deck.question.length === 0 }
+          onPress={ this.handleStartQuiz }>
           Start Quiz
         </InputButton>
       </Animated.View>

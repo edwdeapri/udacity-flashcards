@@ -6,6 +6,9 @@ import InputButton from './InputButton';
 import InputText from './InputText';
 
 import { addNewCard } from '../actions';
+import { addCardToDeck } from '../utils/api';
+import { charcoal, cream } from '../utils/color';
+import { global } from '../utils/global';
 
 class NewCard extends Component {
   state = {
@@ -31,6 +34,10 @@ class NewCard extends Component {
         question: '',
         answer: '',
       }));
+      this.props.navigation.navigate(
+        'Deck',
+        { deckId: deckId }
+      );
     });
   };
 
@@ -38,19 +45,30 @@ class NewCard extends Component {
     const { question, answer } = this.state;
 
     return (
-      <KeyboardAvoidingView behavior="padding" enabled>
-        <Text>Create a New Flashcard</Text>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={[
+          global.darkBackground,
+          global.center,
+          { padding: 15 },
+        ]}>
+        <Text style={ global.title }>Create a New Flashcard</Text>
         <InputText
-          handleChange={(question) => this.setState({ question })}
-          placeholder={'Add Your Question'}
-          value={question}/>
+          value={ question }
+          handleChange={ (question) => this.setState({ question }) }
+          placeholder={ 'Add Your Question' }
+          marginBottom={ 15 }/>
         <InputText
-          handleChange={(answer) => this.setState({ answer })}
-          placeholder={'Add Your Answer'}
-          value={answer}/>
+          value={ answer }
+          handleChange={ (answer) => this.setState({ answer }) }
+          placeholder={ 'Add Your Answer' }
+          marginBottom={ 30 }/>
         <InputButton
-          isDisabled={question === 0 || answer.length === 0}
-          onPress={this.addCard}>
+          onPress={ this.addCard }
+          isDisabled={ question === 0 || answer.length === 0 }
+          backgroundColor={ cream }
+          borderColor={ cream }
+          color={ charcoal }>
           Add Flashcard
         </InputButton>
       </KeyboardAvoidingView>
@@ -65,4 +83,4 @@ function mapStateToProps(stat, { navigation }) {
   };
 }
 
-export default connect(NewCard);
+export default connect(mapStateToProps)(NewCard);

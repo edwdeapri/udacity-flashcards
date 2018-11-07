@@ -7,6 +7,8 @@ import InputText from './InputText';
 
 import { addNewDeck } from '../actions';
 import { saveTitleOfDeck } from '../utils/api';
+import { cream, tan } from '../utils/color';
+import { global } from '../utils/global';
 
 class NewDeck extends Component {
   state = {
@@ -30,17 +32,32 @@ class NewDeck extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" enabled>
-        <Text>
+      <KeyboardAvoidingView
+        behavior="padding"
+        enabled
+        style={[
+          global.darkBackground,
+          global.center,
+          { padding: 15 },
+        ]}>
+        <Text style={[
+            global.subHeader,
+            { color: cream,
+              marginBottom: 40,
+            },
+          ]}>
           Create a New Flashcard Deck
         </Text>
         <InputText
-          handleChange={(title) => this.setState({ title })}
-          placeholder={'What is the Title of your Deck?'}
-          value={this.state.title}/>
+          handleChange={ (title) => this.setState({ title }) }
+          placeholder={ 'What is the Title of your Deck?' }
+          marginBottom={ 40 }
+          value={ this.state.title }/>
         <InputButton
-          isDisabled={this.state.title.length === 0}
-          onPress={this.addDeck}>
+          onPress={ this.addDeck }
+          isDisabled={ this.state.title.length === 0 }
+          borderColor={ tan }
+          color={ tan }>
           Add Deck
         </InputButton>
       </KeyboardAvoidingView>

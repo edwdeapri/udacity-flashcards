@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 
 import InputButton from './InputButton';
 
+import { charcoal, cream, tan } from '../utils/color';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
+import { global } from '../utils/global';
+
 class Quiz extends Component {
   state = {
     questionIndex: 0,
@@ -20,24 +24,64 @@ class Quiz extends Component {
   };
 
   renderQuestion = (index, deck) => (
-    <View>
-      <Text>
-        {index + 1} / {deck.question.length}
+    <View style={ global.wrapper }>
+      <Text style={[
+          global.cardSubHeader,
+          { marginBottom: 10 },
+        ]}>
+        { index + 1 } / { deck.question.length }
       </Text>
-      <Text>
-        {deck.question[index].question}
+      <Text style={[
+          global.cardHeader,
+          { marginBottom: 40 },
+        ]}>
+        { deck.question[index].question }
       </Text>
-      <InputButton onPress={this.toggleShowAnswer}>Show Answer</InputButton>
+      <InputButton
+        backgroundColor={ 'transparent' }
+        borderColor={ 'transparent' }
+        color={ cream }
+        onPress={ this.toggleShowAnswer }>
+        Show Answer
+      </InputButton>
     </View>
   );
 
   renderAnswer = (index, deck) => (
-    <View>
-      <Text>{index + 1} / {deck.question.length}</Text>
-      <Text>{deck.question[index].answer}</Text>
-      <InputButton onPress={this.toggleShowAnswer}>Show Question</InputButton>
-      <InputButton onPress={() => this.incrementAnswers('correctAnswers')}>Correct</InputButton>
-      <InputButton onPress={() => this.incrementAnswers('incorrectAnswers')}>Incorrect</InputButton>
+    <View style={ global.wrapper }>
+      <Text style={[
+          global.cardSubHeader,
+          { marginBottom: 10 },
+        ]}>
+        { index + 1 } / { deck.question.length }
+      </Text>
+      <Text style={[
+          global.cardHeader,
+          { marginBottom: 40 },
+        ]}>
+        { deck.question[index].answer }
+      </Text>
+      <InputButton
+        backgroundColor={ 'transparent' }
+        borderColor={ 'transparent' }
+        color={ cream }
+        onPress={ this.toggleShowAnswer }>
+        Show Question
+      </InputButton>
+      <InputButton
+        backgroundColor={ cream }
+        borderColor={ cream }
+        color={ charcoal }
+        onPress={() => this.incrementAnswers('correctAnswers')}>
+        Correct
+      </InputButton>
+      <InputButton
+        backgroundColor={ tan }
+        borderColor={ tan }
+        color={ cream }
+        onPress={() => this.incrementAnswers('incorrectAnswers')}>
+        Incorrect
+      </InputButton>
     </View>
   );
 
@@ -45,12 +89,34 @@ class Quiz extends Component {
     clearLocalNotification()
       .then(setLocalNotification());
     return (
-      <View>
-        <Text>Correct Answers: {this.state.correctAnswers}</Text>
-        <Text>Incorrect Answers: {this.state.incorrectAnswers}</Text>
-        <Text>Total Score: {(this.state.correctAnswers / this.props.deck.question.length * 100).toFixed()}%</Text>
-        <TextButton onPress={this.reset}>Take it again!</TextButton>
-        <TextButton onPress={() => this.props.navigation.navigate('Deck', { deckId: this.props.deckId })}>Back To Deck</TextButton>
+      <View style={ global.wrapper }>
+        <Text style={[
+            global.cardSubHeader,
+            { marginBottom: 5 },
+          ]}>Correct Answers: { this.state.correctAnswers }</Text>
+        <Text style={[
+            global.cardSubHeader,
+            { marginBottom: 5 },
+          ]}>Incorrect Answers: { this.state.incorrectAnswers }</Text>
+        <Text style={[
+            global.cardHeader,
+            { marginBottom: 40 },
+          ]}>
+          Total Score: { (this.state.correctAnswers / this.props.deck.question.length * 100).toFixed() }%
+        </Text>
+        <InputButton
+          borderColor={ cream }
+          color={ cream }
+          onPress={ this.reset }>
+          Take it again!
+        </InputButton>
+        <InputButton
+          backgroundColor={ cream }
+          borderColor={ cream }
+          color={ charcoal }
+          onPress={ () => this.props.navigation.navigate('Deck', { deckId: this.props.deckId }) }>
+          Back To Deck
+        </InputButton>
       </View>
     );
   };
@@ -85,7 +151,12 @@ class Quiz extends Component {
     const { questionIndex, showAnswer } = this.state;
 
     return (
-      <View> {
+      <View style={[
+          global.darkBackground,
+          { padding: 10,
+            flex: 1,
+          },
+        ]}> {
           showAnswer === false
           ?  questionIndex < deck.question.length
             ? this.renderQuestion(questionIndex, deck)
