@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Flashcards",
-    "description": "An easy to use app to create your own flashcards for studing.",
+    "description": "Flashcards is a flashcard application built with React Native for Udacity's React Nanodegree Program - React Native.",
     "slug": "flashcards",
     "privacy": "public",
     "sdkVersion": "30.0.0",
