@@ -2,6 +2,18 @@
 
 Flashcards is a flashcard application built with React Native for Udacity's React Nanodegree Program - React Native.
 
+## Demo
+
+You can [checkout a live demo](https://expo.io/appetize-simulator?url=https://expo.io/@edwdeapri/flashcards) of the Flashcards app. Once the simulator has launched, follow these instructions:
+
+1. Click "Tap to Play".
+2. Open with by clicking "Chrome".
+3. Click "Always".
+4. Scroll down to and click "Open project using Expo".
+5. The app should be up and running. Feel free explore.
+
+Sometimes the simulator will not launch due to busy servers. If this happens, you can hit refresh or come back and visit when the servers are less busy.
+
 ## Getting Started
 
 These instructions will get you a copy of the Flashcards application up and running on your local environment for development and testing purposes.
